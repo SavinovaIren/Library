@@ -8,6 +8,7 @@ class Reader(models.Model):
     ]
     first_name = models.CharField(verbose_name="Имя читателя", max_length=25)
     last_name = models.CharField(verbose_name="Фамилия читателя", max_length=50)
+    phone = models.BigIntegerField(verbose_name="Номер телефона")
     status = models.CharField(max_length=8, choices=STATUS, verbose_name="Статус читателя", default="Active")
     active_books = models.ManyToManyField('Book', verbose_name="Активные книги", blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
