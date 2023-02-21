@@ -17,8 +17,14 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+
+from library_app.views import ReaderView, BookView, AuthorView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('reader/', ReaderView.as_view()),
+    path('book/', BookView.as_view()),
+    path('author/', AuthorView.as_view()),
 ]
 
 if settings.DEBUG:

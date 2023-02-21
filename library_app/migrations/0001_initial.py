@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
                 ('quantity_of_books', models.IntegerField(verbose_name='Колличество книг')),
                 ('created', models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')),
                 ('updated', models.DateTimeField(auto_now=True, verbose_name='Дата редактирования')),
-                ('author', models.ManyToManyField(blank=True, to='library_app.author', verbose_name='Автор')),
+                ('author', models.ManyToManyField(to='library_app.author', verbose_name='Автор')),
             ],
             options={
                 'verbose_name': 'Книга',

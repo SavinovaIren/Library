@@ -27,7 +27,7 @@ class Book(models.Model):
     name = models.CharField(verbose_name="Название книги", max_length=50)
     description = models.TextField(verbose_name="Описание книги")
     quantity_of_pages = models.IntegerField(verbose_name="Колличество страниц")
-    author = models.ManyToManyField('Author', verbose_name="Автор", blank=True)
+    author = models.ManyToManyField('Author', verbose_name="Автор")
     quantity_of_books = models.IntegerField(verbose_name="Колличество книг")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated = models.DateTimeField(auto_now=True, verbose_name="Дата редактирования")
