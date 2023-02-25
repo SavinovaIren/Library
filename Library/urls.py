@@ -17,15 +17,18 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework import routers
+from library_app import views
 
-from library_app.views import ReaderView, BookView, AuthorView
+router = routers.SimpleRouter()
+router.register(r'authors', views.AuthorViewSet)
+router.register(r'readers', views.ReaderViewSet)
+router.register(r'books', views.BookViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('reader/', ReaderView.as_view()),
-    path('book/', BookView.as_view()),
-    path('author/', AuthorView.as_view()),
-]
+] + router.urls
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
