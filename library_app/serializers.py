@@ -8,13 +8,13 @@ class ReaderSerializer(ModelSerializer):
     active_books = serializers.SlugRelatedField(queryset=Book.objects.all(), slug_field='name', many=True)
     class Meta:
         model = Reader
-        fields = "__all__"
+        exclude = ["created", "updated"]
 
 
 class AuthorSerializer(ModelSerializer):
     class Meta:
         model = Author
-        fields = "__all__"
+        exclude = ["created", "updated"]
 
 
 
@@ -22,4 +22,4 @@ class BookSerializer(ModelSerializer):
     author = serializers.SlugRelatedField(queryset=Author.objects.all(), slug_field='last_name', many=True)
     class Meta:
         model = Book
-        fields = "__all__"
+        exclude = ["created", "updated"]
