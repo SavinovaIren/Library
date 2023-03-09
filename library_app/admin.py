@@ -1,12 +1,17 @@
 from django.contrib import admin
 
-from library_app.models import Author, Book, Reader
 from django.db.models import QuerySet
-from django.utils.html import format_html, urlencode
+from django.utils.html import format_html
 from django.urls import reverse
+
+from library_app.models.author_model import Author
+from library_app.models.book_model import Book
+from library_app.models.reader_model import Reader
+
 
 class BookAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'quantity_of_pages', 'author_link', 'quantity_of_books', 'created', 'updated')
+    actions = ['set_null_quantity',]
 
     def author_link(self, obj):
         author = obj.author
@@ -15,21 +20,33 @@ class BookAdmin(admin.ModelAdmin):
 
     author_link.short_description = "Автор"
 
+    @admin.action(description='Установить колличество 0')
+    def set_null_quantity(self, request, queryset):
+        queryset.update(quantity_of_books=0)
+
 
 class ReaderAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'phone', 'status', 'display_books', 'created', 'updated')
     list_filter = ('status',)
-    actions = ['change_status', 'books_delete']
+    actions = ['change_status', 'books_delete', 'cancel_book_selected']
 
     @admin.action(description='Изменить статус пользователя')
     def change_status(self, request, queryset: QuerySet):
         queryset.update(status='Inactive')
 
+    @admin.action(description='Удалить книги из актива читателя')
+    def cancel_book_selected(self, request, queryset):
 
-    @admin.action(description='Удалить все книги пользователя')
-    def books_delete(self, request, queryset: QuerySet):
-        books = Reader.objects.get(active_books=request)
-        books.active_books.remove()
+        for reader in queryset.all():
+            for book in reader.book.all():
+                book = Book.objects.get(pk=book.pk)
+                book.quantity += 1
+                book.save()
+                reader.book.remove(book)
+
+
+
+
 
 
 class AuthorAdmin(admin.ModelAdmin):
