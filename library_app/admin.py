@@ -11,7 +11,7 @@ from library_app.models.reader_model import Reader
 
 class BookAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'quantity_of_pages', 'author_link', 'quantity_of_books', 'created', 'updated')
-    actions = ['set_null_quantity',]
+    actions = ['set_null_quantity']
 
     def author_link(self, obj):
         author = obj.author
@@ -38,11 +38,11 @@ class ReaderAdmin(admin.ModelAdmin):
     def cancel_book_selected(self, request, queryset):
 
         for reader in queryset.all():
-            for book in reader.book.all():
-                book = Book.objects.get(pk=book.pk)
-                book.quantity += 1
-                book.save()
-                reader.book.remove(book)
+            for active_books in reader.active_books.all():
+                active_books = Book.objects.get(pk=active_books.pk)
+                active_books.quantity_of_books += 1
+                active_books.save()
+                reader.active_books.remove(active_books)
 
 
 

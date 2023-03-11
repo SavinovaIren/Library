@@ -8,7 +8,7 @@ class Book(models.Model):
     description = models.TextField(verbose_name="Описание книги")
     quantity_of_pages = models.IntegerField(verbose_name="Колличество страниц")
     author = models.ForeignKey(Author, verbose_name='Автор', on_delete=models.PROTECT)
-    quantity_of_books = models.IntegerField(verbose_name="Колличество книг", default=1)
+    quantity_of_books = models.PositiveIntegerField(verbose_name="Колличество книг", default=0)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated = models.DateTimeField(auto_now=True, verbose_name="Дата редактирования")
 

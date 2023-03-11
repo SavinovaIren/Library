@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import ModelSerializer
 import re
 
@@ -17,32 +16,58 @@ class PhoneValidator:
             return value
 
 
+
 class ReaderSerializer(ModelSerializer):
     active_books = serializers.SlugRelatedField(queryset=Book.objects.all(), slug_field='name', many=True)
     phone = serializers.IntegerField(validators=[PhoneValidator()])
 
     def validate(self, attrs):
-        if len(attrs['active_books']) > 3:
+        books = attrs.get('active_books', [])
+        for book in books:
+            if book.quantity_of_books == 0:
+                raise serializers.ValidationError(f'Книги {book.name} нет в наличии')
+
+        if len(books) > 3:
             raise serializers.ValidationError('Нельзя добавить больше 3 книг')
         return attrs
 
-    def update(self, instance, validated_data):
-        if validated_data['active_books']:
-            # Уменьшаем количество экземпляров книги, если книга добавляется в актив читателя
-            for book in validated_data['active_books']:
-                if book not in instance.book.all():
-                    if book.quantity > 0:
-                        book.quantity -= 1
-                        book.save()
-                    else:
-                        raise ValidationError(f'Книга {book.title} отсутствует')
-            # Увеличиваем количество экземпляров книги, если книга удаляется из актива читателя
-            for book in instance.book.all():
-                if book not in validated_data['active_books']:
-                    book.quantity += 1
-                    book.save()
 
-        return super().update(instance, validated_data)
+
+    def create(self, validated_data):
+        active_books = validated_data.pop('active_books', [])
+        reader = super().create(validated_data)
+        for book in active_books:
+            book.quantity_of_books -= 1
+            book.save()
+            reader.active_books.add(book)
+        return reader
+
+    def update(self, instance, validated_data):
+        books = validated_data.pop('active_books', [])
+        reader = super().update(instance, validated_data)
+
+        #Получение книг
+        new_list_books = set(books)
+        old_list_books = set(instance.active_books.all())
+
+        #Обновление количества книг
+        for book in old_list_books - new_list_books:
+            book.quantity_of_books += 1
+            book.save()
+
+        for book in new_list_books - old_list_books:
+            book.quantity_of_books -= 1
+            book.save()
+
+        #Добавление книги
+        for book in new_list_books - old_list_books:
+            instance.active_books.add(book)
+
+        #Удаление книги
+        for book in old_list_books - new_list_books:
+            instance.active_books.remove(book)
+
+        return reader
 
     class Meta:
         model = Reader

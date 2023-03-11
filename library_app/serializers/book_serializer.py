@@ -17,6 +17,7 @@ class BookSerializer(ModelSerializer):
 
     quantity_of_books.short_description = "Колличество книг в библиотеке"
 
+
     class Meta:
         model = Book
         fields = '__all__'
