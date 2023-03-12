@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "1",
+    "description": "1",
+    "quantity_of_pages": 500,
+    "quantity_of_books": 8,
+    "created": "2023-03-12 11:34:25.728640 +00:00",
+    "updated": "2023-03-12 13:16:21.049930 +00:00",
+    "author_id": 1
+  },
+  {
+    "id": 2,
+    "name": "12",
+    "description": "12",
+    "quantity_of_pages": 500,
+    "quantity_of_books": 8,
+    "created": "2023-03-12 11:34:31.500716 +00:00",
+    "updated": "2023-03-12 13:16:21.108921 +00:00",
+    "author_id": 2
+  },
+  {
+    "id": 3,
+    "name": "13",
+    "description": "13",
+    "quantity_of_pages": 500,
+    "quantity_of_books": 8,
+    "created": "2023-03-12 11:34:38.359026 +00:00",
+    "updated": "2023-03-12 13:17:07.137879 +00:00",
+    "author_id": 3
+  },
+  {
+    "id": 4,
+    "name": "14",
+    "description": "14",
+    "quantity_of_pages": 500,
+    "quantity_of_books": 9,
+    "created": "2023-03-12 11:34:45.290409 +00:00",
+    "updated": "2023-03-12 13:17:07.168885 +00:00",
+    "author_id": 4
+  }
+]

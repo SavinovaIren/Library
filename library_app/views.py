@@ -1,24 +1,42 @@
+from django.contrib.auth import get_user_model
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
+from library_app.models import Author, Book
+from library_app.permissions import PermissionPolicyMixin, IsAdminOrOwner
 
-from library_app.models.author_model import Author
-from library_app.models.book_model import Book
-from library_app.models.reader_model import Reader
+Reader = get_user_model()
 from library_app.serializers.author_serializer import AuthorSerializer
 from library_app.serializers.book_serializer import BookSerializer
-
 from library_app.serializers.reader_serializer import ReaderSerializer
 
 
-class ReaderViewSet(ModelViewSet):
+class ReaderViewSet(PermissionPolicyMixin, ModelViewSet):
     queryset = Reader.objects.all()
     serializer_class = ReaderSerializer
+    permission_classes_per_method = {
+        "list": [IsAdminOrOwner],
+        "create": [AllowAny],
+        "update": [IsAdminOrOwner],
+        "destroy": [IsAdminOrOwner]
+    }
 
-
-class BookViewSet(ModelViewSet):
+class BookViewSet(PermissionPolicyMixin, ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    permission_classes_per_method = {
+        "list": [AllowAny],
+        "create": [IsAdminUser],
+        "update": [IsAdminUser],
+        "destroy": [IsAdminUser],
+    }
 
 
-class AuthorViewSet(ModelViewSet):
+class AuthorViewSet(PermissionPolicyMixin, ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+    permission_classes_per_method = {
+        "list": [AllowAny],
+        "create": [IsAdminUser],
+        "update": [IsAdminUser],
+        "destroy": [IsAdminUser],
+    }

@@ -1,12 +1,13 @@
 from django.contrib import admin
+from django.contrib.auth import get_user_model
 
 from django.db.models import QuerySet
 from django.utils.html import format_html
 from django.urls import reverse
 
-from library_app.models.author_model import Author
-from library_app.models.book_model import Book
-from library_app.models.reader_model import Reader
+from library_app.models import Author, Book
+
+Reader = get_user_model()
 
 
 class BookAdmin(admin.ModelAdmin):
@@ -26,27 +27,22 @@ class BookAdmin(admin.ModelAdmin):
 
 
 class ReaderAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'phone', 'status', 'display_books', 'created', 'updated')
-    list_filter = ('status',)
+    list_display = ('first_name', 'last_name', 'phone', 'is_active', 'display_books', 'date_joined', 'updated')
+    list_filter = ('is_active',)
     actions = ['change_status', 'books_delete', 'cancel_book_selected']
 
     @admin.action(description='Изменить статус пользователя')
     def change_status(self, request, queryset: QuerySet):
-        queryset.update(status='Inactive')
+        queryset.update(is_active=False)
 
     @admin.action(description='Удалить книги из актива читателя')
     def cancel_book_selected(self, request, queryset):
-
         for reader in queryset.all():
             for active_books in reader.active_books.all():
                 active_books = Book.objects.get(pk=active_books.pk)
                 active_books.quantity_of_books += 1
                 active_books.save()
                 reader.active_books.remove(active_books)
-
-
-
-
 
 
 class AuthorAdmin(admin.ModelAdmin):

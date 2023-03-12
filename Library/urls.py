@@ -19,6 +19,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
 from library_app import views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 router = routers.SimpleRouter()
 router.register(r'authors', views.AuthorViewSet)
@@ -28,6 +32,8 @@ router.register(r'books', views.BookViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ] + router.urls
 
 if settings.DEBUG:

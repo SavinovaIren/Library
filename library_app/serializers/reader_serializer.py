@@ -1,10 +1,11 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 import re
 
-from library_app.models.book_model import Book
+from library_app.models import Book
+Reader = get_user_model()
 
-from library_app.models.reader_model import Reader
 
 
 class PhoneValidator:
@@ -31,11 +32,11 @@ class ReaderSerializer(ModelSerializer):
             raise serializers.ValidationError('Нельзя добавить больше 3 книг')
         return attrs
 
-
-
     def create(self, validated_data):
         active_books = validated_data.pop('active_books', [])
         reader = super().create(validated_data)
+        reader.set_password(reader.password)
+        reader.save()
         for book in active_books:
             book.quantity_of_books -= 1
             book.save()
@@ -45,6 +46,8 @@ class ReaderSerializer(ModelSerializer):
     def update(self, instance, validated_data):
         books = validated_data.pop('active_books', [])
         reader = super().update(instance, validated_data)
+        reader.set_password(reader.password)
+        reader.save()
 
         #Получение книг
         new_list_books = set(books)

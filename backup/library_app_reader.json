@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "password": "pbkdf2_sha256$390000$W8DKPhBh416RQb5pCs0UW6$3SRWDdx4eLuqSf7ZubrIesvKYWm2ckhsEvWJphrUxHg=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "Mira",
+    "first_name": "Марина",
+    "last_name": "Иванова",
+    "email": "mar5674@gmail.com",
+    "is_staff": false,
+    "date_joined": "2023-03-12 11:35:54.972798 +00:00",
+    "phone": 77777777777,
+    "updated": "2023-03-12 13:15:20.158608 +00:00",
+    "is_active": true
+  },
+  {
+    "id": 2,
+    "password": "pbkdf2_sha256$390000$nSLzjm5hWnJypxs196doa5$FE63XOVZYh96TrOQgv0vLYd+cEa7cAUxeO//z1cUMHA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Oleg",
+    "first_name": "Олег",
+    "last_name": "Иванов",
+    "email": "oleg@mail.ru",
+    "is_staff": false,
+    "date_joined": "2023-03-12 13:16:19.936928 +00:00",
+    "phone": 79999999999,
+    "updated": "2023-03-12 13:16:21.016920 +00:00",
+    "is_active": true
+  },
+  {
+    "id": 3,
+    "password": "pbkdf2_sha256$390000$Gxi9nSudBBdMRjXCERsBFT$OrOhZbVOl8dRbh4qkII0MyGudK1JyZEv84yZb2ySZVE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Olga",
+    "first_name": "Ольга",
+    "last_name": "Иванова",
+    "email": "olga@mail.ru",
+    "is_staff": false,
+    "date_joined": "2023-03-12 13:17:06.106701 +00:00",
+    "phone": 79999999213,
+    "updated": "2023-03-12 13:17:07.121890 +00:00",
+    "is_active": true
+  }
+]

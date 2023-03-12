@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "app": "contenttypes",
+    "name": "0001_initial",
+    "applied": "2023-03-12 11:26:28.245830 +00:00"
+  },
+  {
+    "id": 2,
+    "app": "contenttypes",
+    "name": "0002_remove_content_type_name",
+    "applied": "2023-03-12 11:26:28.365827 +00:00"
+  },
+  {
+    "id": 3,
+    "app": "auth",
+    "name": "0001_initial",
+    "applied": "2023-03-12 11:26:28.712371 +00:00"
+  },
+  {
+    "id": 4,
+    "app": "auth",
+    "name": "0002_alter_permission_name_max_length",
+    "applied": "2023-03-12 11:26:28.744373 +00:00"
+  },
+  {
+    "id": 5,
+    "app": "auth",
+    "name": "0003_alter_user_email_max_length",
+    "applied": "2023-03-12 11:26:28.775368 +00:00"
+  },
+  {
+    "id": 6,
+    "app": "auth",
+    "name": "0004_alter_user_username_opts",
+    "applied": "2023-03-12 11:26:28.825374 +00:00"
+  },
+  {
+    "id": 7,
+    "app": "auth",
+    "name": "0005_alter_user_last_login_null",
+    "applied": "2023-03-12 11:26:28.859379 +00:00"
+  },
+  {
+    "id": 8,
+    "app": "auth",
+    "name": "0006_require_contenttypes_0002",
+    "applied": "2023-03-12 11:26:28.884373 +00:00"
+  },
+  {
+    "id": 9,
+    "app": "auth",
+    "name": "0007_alter_validators_add_error_messages",
+    "applied": "2023-03-12 11:26:28.921376 +00:00"
+  },
+  {
+    "id": 10,
+    "app": "auth",
+    "name": "0008_alter_user_username_max_length",
+    "applied": "2023-03-12 11:26:28.969368 +00:00"
+  },
+  {
+    "id": 11,
+    "app": "auth",
+    "name": "0009_alter_user_last_name_max_length",
+    "applied": "2023-03-12 11:26:29.005381 +00:00"
+  },
+  {
+    "id": 12,
+    "app": "auth",
+    "name": "0010_alter_group_name_max_length",
+    "applied": "2023-03-12 11:26:29.068370 +00:00"
+  },
+  {
+    "id": 13,
+    "app": "auth",
+    "name": "0011_update_proxy_permissions",
+    "applied": "2023-03-12 11:26:29.106374 +00:00"
+  },
+  {
+    "id": 14,
+    "app": "auth",
+    "name": "0012_alter_user_first_name_max_length",
+    "applied": "2023-03-12 11:26:29.149380 +00:00"
+  },
+  {
+    "id": 15,
+    "app": "library_app",
+    "name": "0001_initial",
+    "applied": "2023-03-12 11:26:29.657381 +00:00"
+  },
+  {
+    "id": 16,
+    "app": "admin",
+    "name": "0001_initial",
+    "applied": "2023-03-12 11:26:29.772370 +00:00"
+  },
+  {
+    "id": 17,
+    "app": "admin",
+    "name": "0002_logentry_remove_auto_add",
+    "applied": "2023-03-12 11:26:29.808389 +00:00"
+  },
+  {
+    "id": 18,
+    "app": "admin",
+    "name": "0003_logentry_add_action_flag_choices",
+    "applied": "2023-03-12 11:26:29.849381 +00:00"
+  },
+  {
+    "id": 19,
+    "app": "sessions",
+    "name": "0001_initial",
+    "applied": "2023-03-12 11:26:29.971368 +00:00"
+  }
+]
