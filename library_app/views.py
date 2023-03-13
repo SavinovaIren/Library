@@ -17,7 +17,8 @@ class ReaderViewSet(PermissionPolicyMixin, ModelViewSet):
         "list": [IsAdminOrOwner],
         "create": [AllowAny],
         "update": [IsAdminOrOwner],
-        "destroy": [IsAdminOrOwner]
+        "destroy": [IsAdminOrOwner],
+        "retrieve": [IsAdminOrOwner],
     }
 
 class BookViewSet(PermissionPolicyMixin, ModelViewSet):
@@ -28,6 +29,7 @@ class BookViewSet(PermissionPolicyMixin, ModelViewSet):
         "create": [IsAdminUser],
         "update": [IsAdminUser],
         "destroy": [IsAdminUser],
+        "retrieve": [AllowAny],
     }
 
 
@@ -39,4 +41,5 @@ class AuthorViewSet(PermissionPolicyMixin, ModelViewSet):
         "create": [IsAdminUser],
         "update": [IsAdminUser],
         "destroy": [IsAdminUser],
+        "retrieve": [AllowAny]
     }
