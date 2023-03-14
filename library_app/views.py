@@ -2,7 +2,8 @@ from django.contrib.auth import get_user_model
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from library_app.models import Author, Book
-from library_app.permissions import PermissionPolicyMixin, IsAdminOrOwner
+from library_app.permissions import PermissionPolicyMixin, IsOwner
+from rest_condition import Or
 
 Reader = get_user_model()
 from library_app.serializers.author_serializer import AuthorSerializer
@@ -14,12 +15,13 @@ class ReaderViewSet(PermissionPolicyMixin, ModelViewSet):
     queryset = Reader.objects.all()
     serializer_class = ReaderSerializer
     permission_classes_per_method = {
-        "list": [IsAdminOrOwner],
+        "list": ((IsOwner | IsAdminUser),),
         "create": [AllowAny],
-        "update": [IsAdminOrOwner],
-        "destroy": [IsAdminOrOwner],
-        "retrieve": [IsAdminOrOwner],
+        "update": ((IsOwner | IsAdminUser),),
+        "destroy": ((IsOwner | IsAdminUser),),
+        "retrieve": ((IsOwner | IsAdminUser),),
     }
+
 
 class BookViewSet(PermissionPolicyMixin, ModelViewSet):
     queryset = Book.objects.all()

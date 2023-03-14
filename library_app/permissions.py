@@ -1,4 +1,5 @@
-from rest_framework.permissions import BasePermission
+from django.core.exceptions import ValidationError
+from rest_framework.permissions import BasePermission, IsAdminUser
 
 
 class PermissionPolicyMixin:
@@ -14,12 +15,14 @@ class PermissionPolicyMixin:
         super().check_permissions(request)
 
 
-class IsAdminOrOwner(BasePermission):
+class IsOwner(BasePermission):
     message = 'У вас нет доступа: Вы не Администратор или не владелец данной учетной записи'
 
-    def has_permission(self, request, view):
-        if request.user.id == int(view.kwargs['pk']):
+    def has_object_permission(self, request, view, obj):
+        if request.user.id == obj.id:
             return True
-        elif request.user.is_staff:
+
+        elif obj.id is None and obj.is_staff:
             return True
         return False
+
