@@ -22,7 +22,7 @@ class IsOwner(BasePermission):
         if request.user.id == obj.id:
             return True
 
-        elif obj.id is None and obj.is_staff:
+        elif request.user.id is None and request.user.is_staff:
             return True
         return False
 
